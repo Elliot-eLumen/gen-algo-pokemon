@@ -22,6 +22,21 @@ const Setup = () => {
   const handleFitnessChange = (event) => {
     setFitnessFunction(event.target.value);
   };
+
+  const handleSave = () => {
+    fetch("http://127.0.0.1:5000/pokemon", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        poolSize: poolSize,
+        mutationRate: rate,
+        fitnessFunction: fitnessFunction,
+      }),
+    });
+  };
+
   return (
     <div>
       Setup
@@ -82,7 +97,7 @@ const Setup = () => {
           shrink: true,
         }}
       />
-      <Button variant="contained" size="small">
+      <Button variant="contained" size="small" onClick={handleSave}>
         Save
       </Button>
       <Button variant="outlined" size="small">
