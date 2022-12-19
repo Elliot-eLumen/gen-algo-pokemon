@@ -178,189 +178,34 @@ def randomTeamsTwenty():
 def mutate():
   return random.choice(PokemonArray)
 
-def main():
-  setupObj = {}
-  args = sys.argv[:1]
-  if len(args) > 1 :
-    print("too many arguments")
-  else:
-    setupObj= args[0]
+def run_control(setupObj):
+  team = None
+  if setupObj.size == 20:
+    team = randomTeamsTwenty()
+  elif setupObj.size == 10:
+    team = randomTeamsTen()
+  elif setupObj.size == 5:
+    team = randomTeamsFive()
+
   if setupObj.fitness == '-stat':
-    Stat.initialize(setupObj.generations, setupObj.size, setupObj.mutations)
+    Stat.initialize(setupObj.generations, team, setupObj.size, setupObj.mutations, mutate)
   if setupObj.fitness == '-gencov':
-    GenCov.initialize(setupObj.generations, setupObj.size, setupObj.mutations)
+    GenCov.initialize(setupObj.generations, team,setupObj.size, setupObj.mutations, mutate)
   if setupObj.fitness == '-champcov':
-    ChampCov.initialize(setupObj.generations, setupObj.size, setupObj.mutations)
+    ChampCov.initialize(setupObj.generations, team,setupObj.size, setupObj.mutations, mutate)
   if setupObj.fitness == '-combo':
-    Combo.initialize(setupObj.generations, setupObj.size, setupObj.mutations)
+    Combo.initialize(setupObj.generations, team, setupObj.size,setupObj.mutations, mutate)
 
-
-
-# def fitness_func_stat(team):
-#   total = 0
-#   for mon in team:
-#     total += mon.stats
-  
-#   return total
-
-
-# def find_parents_stat(team_pool):
-  
-#   one=None
-#   two=None
-#   three =None
-#   four=None
-#   five=None
-#   one_fit = 0
-  
-#   two_fit = 0
-  
-#   three_fit = 0
-  
-#   four_fit = 0
-  
-#   five_fit = 0
-#   for team in team_pool:
-#     team_fit = fitness_func_combo(team)
-#     if team_fit > five_fit:
-#       if team_fit > four_fit:
-#         if team_fit > three_fit:
-#           if team_fit > two_fit:
-#             if team_fit > one_fit:
-#               one_fit = team_fit
-#               one = team
-#             else:
-#               two_fit = team_fit
-#               two = team
-#           else:
-#             three_fit = team_fit
-#             three = team
-#         else:
-#           four_fit=team_fit
-#           four = team
-#       else:
-#         five_fit=team_fit
-#         five = team
-#   if one:
-#     parents[0] = one 
-#   if two:
-#     parents[1] = two
-#   if three:
-#     parents[2] = three
-#   if four:
-#     parents[3] = four
-#   if five:
-#     parents[4] = five
-#   return
-
-# def new_gen_stat(parent_arr, mutation_rate):
-  
-#   new_gen = [[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}]]
-#   new_gen[0] = parent_arr[0]
-#   for x in range(1,20):
-#     for y in range(6):
-#       new_gen[x][y] = parent_arr[random.randint(0,4)][y]
-  
-#   for x in range(mutation_rate):
-#     new_gen[18][random.randint(0,5)] = mutate()
-#   for x in range(mutation_rate):
-#     new_gen[19][random.randint(0,5)] = mutate()
-  
     
-#   return new_gen
 
-# def run_stat(generations, init_pop, mutation_rate):
-#   pop = init_pop
-#   for x in range(generations):
-   
-#     find_parents_stat(pop)
-#     pop = new_gen_stat(parents, mutation_rate)
-    
-#   find_parents_stat(pop)
-  
-#   return parents[0]
-
-# def fitness_func_cov(team):
-#   types = []
-#   for mon in team:
-#     for type in mon.typing:
-#       types.append(type)
-#   fitness = list(set(types))
-#   return len(fitness)
-
-
-# def fitness_func_se(team):
-#   types = []
-#   for mon in team:
-#     for type in mon.typing:
-#       types.append(type)
-#   fitness = list(set(types))
-#   score = 0
-#   for type in fitness:
-#     if type == "water":
-#       score += 3
-#     if type == "ice":
-#       score += 3
-#     if type == "grass":
-#       score += 3
-#     if type == "bug":
-#       score += 3
-#     if type == 'ground':
-#       score += 2
-#     if type == 'rock':
-#       score += 2
-#     if type == 'electric':
-#       score += 2
-#     if type == 'ghost':
-#       score += 2
-    
-#     if type == "fighting":
-#       score+=1
-#     if type == "fire":
-#       score+=1
-#     if type == "poison":
-#       score+=1
-#     if type == "flying":
-#       score+=1
-    
-#   return score
-
-# def fitness_func_combo(team):
-#   stat = fitness_func_stat(team)/(3800*2)
-#   #coverage = fitness_func_cov(team)/36
-#   effective = fitness_func_se(team)/(24*2)
-#   fitness = stat + effective
-#   #print(fitness)
-#   return fitness
-
-# avg = 0
-# avg_fit = 0
-# y = 0
-
-# for x in range(1000):
-#   test = run_stat(500,randomTeamsTwenty(),2)
-#   total = 0
-#   avg_fit+=(fitness_func_cov(test)/12)
-#   for mon in test:
-#     print(mon.name + ": %s" %mon.stats)
-#     total += mon.stats
-#   print("totals stats: %s" %total)
-#   avg += total
-#   y += fitness_func_cov(test)
-
-# test = run_stat(500,randomTeamsTwenty(),2)
-# total = 0
-
-# for mon in test:
-#   print(mon.name + ": %s" %mon.stats)
-#   total += mon.stats
-
-
-# print(avg_fit/10)
-
-# print(avg/1000)
-# y = y / 1000
-# print(y)
+teams = Combo.initialize(50, randomTeamsTwenty(), 20, 2, mutate)
+counter = 0
+for team in teams:
+  print("________%s______" %counter)
+  for mon in team:
+    print(mon.name)
+  print("______________")
+  counter += 1
 
 
 
@@ -374,73 +219,3 @@ def main():
 
 
 
-# worst = 5000
-# best = 0
-# count = 1
-# bestt = {}
-
-# worstt = {}
-
-# arr = randomTeamsTwenty()
-# index = 1
-  
-  
-# for team in arr:
-#     total = 0
-#     print("team %s ---------" %index)
-#     for mon in team:
-#       print(mon.name + ": %s"  %mon.stats)
-#       total += mon.stats
-#     print("team stats: %s"  %total)
-#     print("--------")
-#     index += 1
-#     if total > best:
-#       best = total
-#       bestt = team
-#     if total < worst:
-#       worst = total
-#       worstt = team
-
-# print("best")
-# for mon in bestt:
-#     print(mon.name)
-# print(best)
-# print("-----------")
-# print("worst")
-# for mon in worstt:
-#     print(mon.name)
-# print(worst)
-# count += 1
-
-# print(best)
-# print(worst)
-# print(count)
-
-
-# team1 = run_stat(5,randomTeamsTwenty(),2)
-# team1fit = fitness_func_combo(team1)
-# team1fitscore = team1fit/4080
-
-# team2 = run_stat(20,randomTeamsTwenty(),2)
-# team2fit = fitness_func_combo(team2)
-# team2fitscore = team2fit/4080
-
-# team3 = run_stat(500,randomTeamsTwenty(),2)
-# team3fit = fitness_func_combo(team3)
-# team3fitscore = team3fit/4080
-
-
-# for mon in team1:
-#   print(mon.name)
-# print(team1fit)
-#print(team1fitscore)
-
-# for mon in team2:
-#   print(mon.name)
-# print(team2fit)
-#print(team2fitscore)
-
-# for mon in team3:
-#   print(mon.name)
-# print(team3fit)
-#print(team3fitscore)

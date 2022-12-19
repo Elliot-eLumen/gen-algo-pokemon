@@ -17,7 +17,7 @@ def fitness_func_cov(team):
 
 
 
-def new_gen_cov(parent_arr, mutation_rate, size):
+def new_gen_cov(parent_arr, mutation_rate, size, mutate):
   
     new_gen = []
     for x in range(size):
@@ -29,7 +29,8 @@ def new_gen_cov(parent_arr, mutation_rate, size):
     
     mutations = size - mutation_rate
     for x in range(mutations, size):
-      new_gen[x][random.randint(0,5)] = Mon.mutate()
+      new_gen[x][random.randint(0,5)] = mutate()
+    return new_gen
 
 
 def find_parents_cov(team_pool):
@@ -82,28 +83,25 @@ def find_parents_cov(team_pool):
     return
 
 
-def run_cov(generations, init_pop, mutation_rate, size):
+def run_cov(generations, init_pop, mutation_rate, size, mut_func):
     pop = init_pop
+    best_team_per_gen = []
     for x in range(generations):
     
       find_parents_cov(pop)
-      pop = new_gen_cov(parents, mutation_rate, size)
+      best_team_per_gen.append(parents[0])
+      pop = new_gen_cov(parents, mutation_rate, size, mut_func)
+      
+
       
     find_parents_cov(pop)
+    best_team_per_gen.append(parents[0])
     
-    return parents[0]
+    return best_team_per_gen
 
-def initialize(generations, pool_size, mutation):
-  if pool_size == 5:
-    init_pop = Mon.randomTeamsFive()
-    pop_size=5
-  if pool_size == 10:
-    init_pop = Mon.randomTeamsTen()
-    pop_size=10
-  if pool_size == 20:
-    init_pop = Mon.randomTeamsTwenty()
-    pop_size = 20
-  run_cov(generations, init_pop, mutation, pop_size)
+def initialize(generations, init_pop,  pool_size, mutation, mut_func):
+  
+  return run_cov(generations, init_pop, mutation, pool_size, mut_func)
 
 
 
