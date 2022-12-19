@@ -23,6 +23,7 @@ const Setup = () => {
   };
   return (
     <div>
+      Setup
       <FormControl fullWidth>
         <InputLabel id="team-pool-size-label">Team Pool Size</InputLabel>
         <Select
