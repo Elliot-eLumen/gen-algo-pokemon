@@ -23,7 +23,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Card sx={{ padding: "15px 0", marginBottom: 2 }}>
+      <Card sx={{ borderRadius: "0", padding: "15px 0", marginBottom: 2 }}>
         <Typography
           variant="h6"
           noWrap
@@ -31,7 +31,7 @@ function App() {
           href="/"
           sx={{
             mr: 2,
-            pl: 4,
+            pl: 3,
             fontWeight: 700,
             color: "inherit",
             textDecoration: "none",
