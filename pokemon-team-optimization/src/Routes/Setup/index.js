@@ -75,7 +75,7 @@ const Setup = () => {
         id="outlined-number"
         label="Number"
         type="number"
-        InputProps={{ inputProps: { min: 0, max: 1000 } }}
+        InputProps={{ inputProps: { min: 0, max: 500 } }}
         InputLabelProps={{
           shrink: true,
         }}
