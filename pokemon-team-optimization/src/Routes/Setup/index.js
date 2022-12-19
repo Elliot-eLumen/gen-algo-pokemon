@@ -1,4 +1,5 @@
 import {
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -81,6 +82,12 @@ const Setup = () => {
           shrink: true,
         }}
       />
+      <Button variant="contained" size="small">
+        Save
+      </Button>
+      <Button variant="outlined" size="small">
+        Clear
+      </Button>
     </div>
   );
 };
