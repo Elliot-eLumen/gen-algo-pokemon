@@ -10,6 +10,7 @@ import ChampCov
 parents = [[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}]]
 
 def fitness_func_combo(team):
+  print(team)
   stat = Stat.fitness_func_stat(team)/(3800*2)
   #coverage = fitness_func_cov(team)/36
   effective = ChampCov.fitness_func_se(team)/(24*2)

@@ -178,34 +178,40 @@ def randomTeamsTwenty():
 def mutate():
   return random.choice(PokemonArray)
 
-def run_control(setupObj):
+def run_control(setupObj): 
+  #print(setupObj['poolSize'])
   team = None
-  if setupObj.size == 20:
+  if setupObj['poolSize'] == '20':
     team = randomTeamsTwenty()
-  elif setupObj.size == 10:
+  elif setupObj['poolSize'] == '10':
     team = randomTeamsTen()
-  elif setupObj.size == 5:
+  elif setupObj['poolSize'] == '5':
+    #print("here")
     team = randomTeamsFive()
 
-  if setupObj.fitness == '-stat':
-    Stat.initialize(setupObj.generations, team, setupObj.size, setupObj.mutations, mutate)
-  if setupObj.fitness == '-gencov':
-    GenCov.initialize(setupObj.generations, team,setupObj.size, setupObj.mutations, mutate)
-  if setupObj.fitness == '-champcov':
-    ChampCov.initialize(setupObj.generations, team,setupObj.size, setupObj.mutations, mutate)
-  if setupObj.fitness == '-combo':
-    Combo.initialize(setupObj.generations, team, setupObj.size,setupObj.mutations, mutate)
+  
+  #for itemm in team:
+    #print(itemm) 
+
+  if setupObj['fitnessFunction'] == 'stat':
+    Stat.initialize(25, team, int(setupObj['poolSize']), int(setupObj['mutationRate']), mutate)
+  if setupObj['fitnessFunction'] == 'general':
+    GenCov.initialize(25, team,int(setupObj['poolSize']), int(setupObj['mutationRate']), mutate)
+  if setupObj['fitnessFunction'] == 'specific':
+    ChampCov.initialize(25, team,int(setupObj['poolSize']), int(setupObj['mutationRate']), mutate)
+  if setupObj['fitnessFunction'] == 'combo':
+    Combo.initialize(25, team, int(setupObj['poolSize']),int(setupObj['mutationRate']), mutate)
 
     
 
-teams = Combo.initialize(50, randomTeamsTwenty(), 20, 2, mutate)
-counter = 0
-for team in teams:
-  print("________%s______" %counter)
-  for mon in team:
-    print(mon.name)
-  print("______________")
-  counter += 1
+# teams = GenCov.initialize(50, randomTeamsTwenty(), 20, 2, mutate)
+# counter = 0
+# for team in teams:
+#   print("________%s______" %counter)
+#   for mon in team:
+#     print(mon.name)
+#   print("______________")
+#   counter += 1
 
 
 
