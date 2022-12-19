@@ -1,11 +1,13 @@
 import {
   Button,
+  Card,
   FormControl,
   Grid,
   InputLabel,
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 const Setup = () => {
@@ -39,8 +41,10 @@ const Setup = () => {
   };
 
   return (
-    <div>
-      Setup
+    <Card sx={{ padding: 3 }}>
+      <Typography variant="h5" component="h2" mb={2}>
+        Setup
+      </Typography>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
@@ -128,7 +132,7 @@ const Setup = () => {
           </Button>
         </Grid>
       </Grid>
-    </div>
+    </Card>
   );
 };
 
