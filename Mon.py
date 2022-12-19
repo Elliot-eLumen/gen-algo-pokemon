@@ -168,103 +168,94 @@ def randomTeamsTwenty():
   teamArray[19]=team19
   return teamArray
 
-parents = [[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}]]
+
 def mutate():
   return random.choice(PokemonArray)
 
 
-def fitness_func_stat(team):
-  total = 0
-  for mon in team:
-    total += mon.stats
+# def fitness_func_stat(team):
+#   total = 0
+#   for mon in team:
+#     total += mon.stats
   
-  return total
+#   return total
 
 
-def find_parents_stat(team_pool):
+# def find_parents_stat(team_pool):
   
-  one=None
-  two=None
-  three =None
-  four=None
-  five=None
-  one_fit = 0
+#   one=None
+#   two=None
+#   three =None
+#   four=None
+#   five=None
+#   one_fit = 0
   
-  two_fit = 0
+#   two_fit = 0
   
-  three_fit = 0
+#   three_fit = 0
   
-  four_fit = 0
+#   four_fit = 0
   
-  five_fit = 0
-  for team in team_pool:
-    team_fit = fitness_func_combo(team)
-    if team_fit > five_fit:
-      if team_fit > four_fit:
-        if team_fit > three_fit:
-          if team_fit > two_fit:
-            if team_fit > one_fit:
-              one_fit = team_fit
-              one = team
-            else:
-              two_fit = team_fit
-              two = team
-          else:
-            three_fit = team_fit
-            three = team
-        else:
-          four_fit=team_fit
-          four = team
-      else:
-        five_fit=team_fit
-        five = team
-  if one:
-    parents[0] = one 
-  if two:
-    parents[1] = two
-  if three:
-    parents[2] = three
-  if four:
-    parents[3] = four
-  if five:
-    parents[4] = five
-  return
+#   five_fit = 0
+#   for team in team_pool:
+#     team_fit = fitness_func_combo(team)
+#     if team_fit > five_fit:
+#       if team_fit > four_fit:
+#         if team_fit > three_fit:
+#           if team_fit > two_fit:
+#             if team_fit > one_fit:
+#               one_fit = team_fit
+#               one = team
+#             else:
+#               two_fit = team_fit
+#               two = team
+#           else:
+#             three_fit = team_fit
+#             three = team
+#         else:
+#           four_fit=team_fit
+#           four = team
+#       else:
+#         five_fit=team_fit
+#         five = team
+#   if one:
+#     parents[0] = one 
+#   if two:
+#     parents[1] = two
+#   if three:
+#     parents[2] = three
+#   if four:
+#     parents[3] = four
+#   if five:
+#     parents[4] = five
+#   return
 
-def new_gen_stat(parent_arr, mutation_rate):
+# def new_gen_stat(parent_arr, mutation_rate):
   
-  new_gen = [[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}]]
-  new_gen[0] = parent_arr[0]
-  for x in range(1,20):
-    for y in range(6):
-      new_gen[x][y] = parent_arr[random.randint(0,4)][y]
+#   new_gen = [[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}]]
+#   new_gen[0] = parent_arr[0]
+#   for x in range(1,20):
+#     for y in range(6):
+#       new_gen[x][y] = parent_arr[random.randint(0,4)][y]
   
-  for x in range(mutation_rate):
-    new_gen[18][random.randint(0,5)] = mutate()
-  for x in range(mutation_rate):
-    new_gen[19][random.randint(0,5)] = mutate()
-  # print("--------")
-  # for z in range(10):
-  #   print("000000000000")
-  #   tot = 0
-  #   for mon in new_gen[z]:
-  #     print(mon.name + ": %s" %mon.stats)
-  #     tot += mon.stats
-  #   print(tot)
-  #   print("00000000000")
-  # print("----------")
+#   for x in range(mutation_rate):
+#     new_gen[18][random.randint(0,5)] = mutate()
+#   for x in range(mutation_rate):
+#     new_gen[19][random.randint(0,5)] = mutate()
+  
     
-  return new_gen
+#   return new_gen
 
-def run_stat(generations, init_pop, mutation_rate):
-  pop = init_pop
-  for x in range(generations):
-    #print("______ %s _______" %x)
-    find_parents_stat(pop)
-    pop = new_gen_stat(parents, mutation_rate)
+# def run_stat(generations, init_pop, mutation_rate):
+#   pop = init_pop
+#   for x in range(generations):
+   
+#     find_parents_stat(pop)
+#     pop = new_gen_stat(parents, mutation_rate)
     
-  find_parents_stat(pop)
+#   find_parents_stat(pop)
   
-  return parents[0]
+#   return parents[0]
 
 def fitness_func_cov(team):
   types = []
