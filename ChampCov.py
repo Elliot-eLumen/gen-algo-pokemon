@@ -7,16 +7,47 @@ import random
 
 parents = [[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}],[{},{},{},{},{},{}]]
 
-
-
-def fitness_func_stat(team):
-    total = 0
-    for mon in team:
-      total += mon.stats
+def fitness_func_se(team):
+  types = []
+  for mon in team:
+    for type in mon.typing:
+      types.append(type)
+  fitness = list(set(types))
+  score = 0
+  for type in fitness:
+    if type == "water":
+      score += 3
+    if type == "ice":
+      score += 3
+    if type == "grass":
+      score += 3
+    if type == "bug":
+      score += 3
+    if type == 'ground':
+      score += 2
+    if type == 'rock':
+      score += 2
+    if type == 'electric':
+      score += 2
+    if type == 'ghost':
+      score += 2
     
-    return total
+    if type == "fighting":
+      score+=1
+    if type == "fire":
+      score+=1
+    if type == "poison":
+      score+=1
+    if type == "flying":
+      score+=1
+    
+  return score
 
-def new_gen_stat(parent_arr, mutation_rate, size):
+
+
+
+
+def new_gen_se(parent_arr, mutation_rate, size):
   
     new_gen = []
     for x in range(size):
@@ -31,7 +62,7 @@ def new_gen_stat(parent_arr, mutation_rate, size):
       new_gen[x][random.randint(0,5)] = Mon.mutate()
 
 
-def find_parents_stat(team_pool):
+def find_parents_se(team_pool):
   
     one=None
     two=None
@@ -48,7 +79,7 @@ def find_parents_stat(team_pool):
     
     five_fit = 0
     for team in team_pool:
-      team_fit = fitness_func_stat(team)
+      team_fit = fitness_func_se(team)
       if team_fit > five_fit:
         if team_fit > four_fit:
           if team_fit > three_fit:
@@ -81,14 +112,14 @@ def find_parents_stat(team_pool):
     return
 
 
-def run_stat(generations, init_pop, mutation_rate, size):
+def run_se(generations, init_pop, mutation_rate, size):
     pop = init_pop
     for x in range(generations):
     
-      find_parents_stat(pop)
-      pop = new_gen_stat(parents, mutation_rate, size)
+      find_parents_se(pop)
+      pop = new_gen_se(parents, mutation_rate, size)
       
-    find_parents_stat(pop)
+    find_parents_se(pop)
     
     return parents[0]
 
@@ -102,6 +133,8 @@ def initialize(generations, pool_size, mutation):
   if pool_size == 20:
     init_pop = Mon.randomTeamsTwenty()
     pop_size = 20
-  run_stat(generations, init_pop, mutation, pop_size)
+  run_se(generations, init_pop, mutation, pop_size)
+
+
 
 
