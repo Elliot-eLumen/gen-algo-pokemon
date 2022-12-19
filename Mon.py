@@ -1,5 +1,10 @@
 
 import random
+import Stat
+import Combo
+import ChampCov
+import GenCov
+import sys
 class Mon():
 
   def __init__(self, name, stats, typing):
@@ -172,6 +177,23 @@ def randomTeamsTwenty():
 def mutate():
   return random.choice(PokemonArray)
 
+def main():
+  setupObj = {}
+  args = sys.argv[:1]
+  if len(args) > 1 :
+    print("too many arguments")
+  else:
+    setupObj= args[0]
+  if setupObj.fitness == '-stat':
+    Stat.initialize(setupObj.generations, setupObj.size, setupObj.mutations)
+  if setupObj.fitness == '-gencov':
+    GenCov.initialize(setupObj.generations, setupObj.size, setupObj.mutations)
+  if setupObj.fitness == '-champcov':
+    ChampCov.initialize(setupObj.generations, setupObj.size, setupObj.mutations)
+  if setupObj.fitness == '-combo':
+    Combo.initialize(setupObj.generations, setupObj.size, setupObj.mutations)
+
+
 
 # def fitness_func_stat(team):
 #   total = 0
@@ -257,58 +279,58 @@ def mutate():
   
 #   return parents[0]
 
-def fitness_func_cov(team):
-  types = []
-  for mon in team:
-    for type in mon.typing:
-      types.append(type)
-  fitness = list(set(types))
-  return len(fitness)
+# def fitness_func_cov(team):
+#   types = []
+#   for mon in team:
+#     for type in mon.typing:
+#       types.append(type)
+#   fitness = list(set(types))
+#   return len(fitness)
 
 
-def fitness_func_se(team):
-  types = []
-  for mon in team:
-    for type in mon.typing:
-      types.append(type)
-  fitness = list(set(types))
-  score = 0
-  for type in fitness:
-    if type == "water":
-      score += 3
-    if type == "ice":
-      score += 3
-    if type == "grass":
-      score += 3
-    if type == "bug":
-      score += 3
-    if type == 'ground':
-      score += 2
-    if type == 'rock':
-      score += 2
-    if type == 'electric':
-      score += 2
-    if type == 'ghost':
-      score += 2
+# def fitness_func_se(team):
+#   types = []
+#   for mon in team:
+#     for type in mon.typing:
+#       types.append(type)
+#   fitness = list(set(types))
+#   score = 0
+#   for type in fitness:
+#     if type == "water":
+#       score += 3
+#     if type == "ice":
+#       score += 3
+#     if type == "grass":
+#       score += 3
+#     if type == "bug":
+#       score += 3
+#     if type == 'ground':
+#       score += 2
+#     if type == 'rock':
+#       score += 2
+#     if type == 'electric':
+#       score += 2
+#     if type == 'ghost':
+#       score += 2
     
-    if type == "fighting":
-      score+=1
-    if type == "fire":
-      score+=1
-    if type == "poison":
-      score+=1
-    if type == "flying":
-      score+=1
+#     if type == "fighting":
+#       score+=1
+#     if type == "fire":
+#       score+=1
+#     if type == "poison":
+#       score+=1
+#     if type == "flying":
+#       score+=1
     
-  return score
+#   return score
 
-def fitness_func_combo(team):
-  stat = fitness_func_stat(team)/(3800*2)
-  #coverage = fitness_func_cov(team)/36
-  effective = fitness_func_se(team)/(24*2)
-  fitness = stat + effective
-  #print(fitness)
-  return fitness
+# def fitness_func_combo(team):
+#   stat = fitness_func_stat(team)/(3800*2)
+#   #coverage = fitness_func_cov(team)/36
+#   effective = fitness_func_se(team)/(24*2)
+#   fitness = stat + effective
+#   #print(fitness)
+#   return fitness
 
 # avg = 0
 # avg_fit = 0
@@ -394,30 +416,30 @@ def fitness_func_combo(team):
 # print(count)
 
 
-team1 = run_stat(5,randomTeamsTwenty(),2)
-team1fit = fitness_func_combo(team1)
-team1fitscore = team1fit/4080
+# team1 = run_stat(5,randomTeamsTwenty(),2)
+# team1fit = fitness_func_combo(team1)
+# team1fitscore = team1fit/4080
 
-team2 = run_stat(20,randomTeamsTwenty(),2)
-team2fit = fitness_func_combo(team2)
-team2fitscore = team2fit/4080
+# team2 = run_stat(20,randomTeamsTwenty(),2)
+# team2fit = fitness_func_combo(team2)
+# team2fitscore = team2fit/4080
 
-team3 = run_stat(500,randomTeamsTwenty(),2)
-team3fit = fitness_func_combo(team3)
-team3fitscore = team3fit/4080
+# team3 = run_stat(500,randomTeamsTwenty(),2)
+# team3fit = fitness_func_combo(team3)
+# team3fitscore = team3fit/4080
 
 
-for mon in team1:
-  print(mon.name)
-print(team1fit)
+# for mon in team1:
+#   print(mon.name)
+# print(team1fit)
 #print(team1fitscore)
 
-for mon in team2:
-  print(mon.name)
-print(team2fit)
+# for mon in team2:
+#   print(mon.name)
+# print(team2fit)
 #print(team2fitscore)
 
-for mon in team3:
-  print(mon.name)
-print(team3fit)
+# for mon in team3:
+#   print(mon.name)
+# print(team3fit)
 #print(team3fitscore)
