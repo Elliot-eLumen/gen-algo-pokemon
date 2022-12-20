@@ -5,6 +5,7 @@ import Combo
 import ChampCov
 import GenCov
 import sys
+import json
 class Mon():
 
   def __init__(self, name, stats, typing, id):
@@ -194,24 +195,24 @@ def run_control(setupObj):
     #print(itemm) 
 
   if setupObj['fitnessFunction'] == 'stat':
-    Stat.initialize(25, team, int(setupObj['poolSize']), int(setupObj['mutationRate']), mutate)
+     Stat.initialize(25, team, int(setupObj['poolSize']), int(setupObj['mutationRate']), mutate)
   if setupObj['fitnessFunction'] == 'general':
-    GenCov.initialize(25, team,int(setupObj['poolSize']), int(setupObj['mutationRate']), mutate)
+     GenCov.initialize(25, team,int(setupObj['poolSize']), int(setupObj['mutationRate']), mutate)
   if setupObj['fitnessFunction'] == 'specific':
     ChampCov.initialize(25, team,int(setupObj['poolSize']), int(setupObj['mutationRate']), mutate)
   if setupObj['fitnessFunction'] == 'combo':
-    Combo.initialize(25, team, int(setupObj['poolSize']),int(setupObj['mutationRate']), mutate)
+     Combo.initialize(20, team, int(setupObj['poolSize']),int(setupObj['mutationRate']), mutate)
 
     
 
-# teams = GenCov.initialize(50, randomTeamsTwenty(), 20, 2, mutate)
-# counter = 0
-# for team in teams:
-#   print("________%s______" %counter)
-#   for mon in team:
-#     print(mon.name)
-#   print("______________")
-#   counter += 1
+teams = Combo.initialize(25, randomTeamsFive(), 10, 3, mutate)
+counter = 0
+for team in teams:
+  print("________%s______" %counter)
+  for mon in team:
+    print(mon.name)
+  print("______________")
+  counter += 1
 
 
 

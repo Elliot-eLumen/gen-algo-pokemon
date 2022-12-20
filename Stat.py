@@ -57,15 +57,26 @@ def find_parents_stat(team_pool):
             if team_fit > two_fit:
               if team_fit > one_fit:
                 one_fit = team_fit
+                five = four
+                four = three 
+                three = two
+                two = one
                 one = team
+
               else:
                 two_fit = team_fit
+                five = four
+                four = three 
+                three = two
                 two = team
             else:
               three_fit = team_fit
+              five = four
+              four = three 
               three = team
           else:
             four_fit=team_fit
+            five = four
             four = team
         else:
           five_fit=team_fit
@@ -81,7 +92,6 @@ def find_parents_stat(team_pool):
     if five:
       parents[4] = five
     return
-
 
 def run_stat(generations, init_pop, mutation_rate, size, mutation_func):
     pop = init_pop

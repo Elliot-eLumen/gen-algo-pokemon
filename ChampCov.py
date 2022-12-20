@@ -87,15 +87,26 @@ def find_parents_se(team_pool):
             if team_fit > two_fit:
               if team_fit > one_fit:
                 one_fit = team_fit
+                five = four
+                four = three 
+                three = two
+                two = one
                 one = team
+
               else:
                 two_fit = team_fit
+                five = four
+                four = three 
+                three = two
                 two = team
             else:
               three_fit = team_fit
+              five = four
+              four = three 
               three = team
           else:
             four_fit=team_fit
+            five = four
             four = team
         else:
           five_fit=team_fit
