@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 import Mon
+import json
 
 
 class PokemonHandler(Resource):
@@ -11,4 +12,14 @@ class PokemonHandler(Resource):
 
         args = parser.parse_args()
 
-        return Mon.run_control(args)
+        teams = Mon.run_control(args)
+
+        best_teams = []
+        for team in teams:
+            mons = []
+            for mon in team:
+                mon_json = mon.toJson()
+                mons.append(mon_json)
+            best_teams.append(mons)
+
+        return best_teams

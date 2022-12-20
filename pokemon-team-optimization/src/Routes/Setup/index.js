@@ -37,6 +37,10 @@ const Setup = () => {
         mutationRate: rate,
         fitnessFunction: fitnessFunction,
       }),
+    }).then((res) => {
+      res.json().then((data) => {
+        console.log(data);
+      });
     });
   };
 
