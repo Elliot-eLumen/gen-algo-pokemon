@@ -1,7 +1,6 @@
 import random
-import Stat
-import ChampCov
-
+from fitnessFuncs import Stat
+from fitnessFuncs import ChampCov
 
 parents = [
     [{}, {}, {}, {}, {}, {}],

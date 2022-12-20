@@ -1,8 +1,5 @@
 import random
-import Stat
-import Combo
-import ChampCov
-import GenCov
+from fitnessFuncs import Stat, Combo, GenCov, ChampCov
 
 
 class Mon:
