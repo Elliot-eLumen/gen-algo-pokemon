@@ -6,13 +6,15 @@ import json
 class PokemonHandler(Resource):
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument("poolSize", type=str)
-        parser.add_argument("mutationRate", type=str)
+        parser.add_argument("poolSize", type=int)
+        parser.add_argument("mutationRate", type=int)
         parser.add_argument("fitnessFunction", type=str)
 
         args = parser.parse_args()
 
-        teams = Mon.run_control(args)
+        teams = Mon.run_control(
+            args["poolSize"], args["mutationRate"], args["fitnessFunction"]
+        )
 
         best_teams = []
         for team in teams:

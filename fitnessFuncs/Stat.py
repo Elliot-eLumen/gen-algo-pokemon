@@ -31,7 +31,6 @@ def new_gen_stat(parent_arr, mutation_rate, size, mutate):
     mutations = size - mutation_rate
     for x in range(mutations, size):
         new_gen[x][random.randint(0, 5)] = mutate()
-    print(len(new_gen))
     return new_gen
 
 

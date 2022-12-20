@@ -525,32 +525,32 @@ def mutate():
     return random.choice(PokemonArray)
 
 
-def run_control(setupObj):
+def run_control(poolSize, mutationRate, fitnessFunction):
     team = None
-    if setupObj["poolSize"] == "20":
+    if poolSize == 20:
         team = randomTeamsTwenty()
-    elif setupObj["poolSize"] == "10":
+    elif poolSize == 10:
         team = randomTeamsTen()
-    elif setupObj["poolSize"] == "5":
+    elif poolSize == 5:
         team = randomTeamsFive()
 
     best_teams = []
 
-    if setupObj["fitnessFunction"] == "stats":
+    if fitnessFunction == "stats":
         best_teams = Stat.initialize(
-            25, team, int(setupObj["poolSize"]), int(setupObj["mutationRate"]), mutate
+            25, team, poolSize, mutationRate, mutate
         )
-    if setupObj["fitnessFunction"] == "general":
+    if fitnessFunction == "general":
         best_teams = GenCov.initialize(
-            25, team, int(setupObj["poolSize"]), int(setupObj["mutationRate"]), mutate
+            25, team, poolSize, mutationRate, mutate
         )
-    if setupObj["fitnessFunction"] == "specific":
+    if fitnessFunction == "specific":
         best_teams = ChampCov.initialize(
-            25, team, int(setupObj["poolSize"]), int(setupObj["mutationRate"]), mutate
+            25, team, poolSize, mutationRate, mutate
         )
-    if setupObj["fitnessFunction"] == "combo":
+    if fitnessFunction == "combo":
         best_teams = Combo.initialize(
-            20, team, int(setupObj["poolSize"]), int(setupObj["mutationRate"]), mutate
+            20, team, poolSize, mutationRate, mutate
         )
 
     return best_teams
