@@ -536,7 +536,7 @@ def run_control(setupObj):
 
     best_teams = []
 
-    if setupObj["fitnessFunction"] == "stat":
+    if setupObj["fitnessFunction"] == "stats":
         best_teams = Stat.initialize(
             25, team, int(setupObj["poolSize"]), int(setupObj["mutationRate"]), mutate
         )
