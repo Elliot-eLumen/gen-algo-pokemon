@@ -95,6 +95,16 @@ function App() {
                   </ListItemButton>
                 </ListItem>
               </NavLink>
+              <NavLink
+                to={"/result"}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <ListItem>
+                  <ListItemButton>
+                    <ListItemText>Result</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
             </List>
           </Drawer>
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

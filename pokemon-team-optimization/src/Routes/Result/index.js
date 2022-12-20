@@ -1,8 +1,13 @@
+import { Card, Typography } from "@mui/material";
+
 const Result = () => {
   return (
-    <div>
-      <h1>Results</h1>
-    </div>
+    <>
+      <Typography variant="h5" component="h2">
+        Results
+      </Typography>
+      <Card sx={{ padding: 3 }}></Card>
+    </>
   );
 };
 
