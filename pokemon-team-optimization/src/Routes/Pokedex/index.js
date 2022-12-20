@@ -13,7 +13,6 @@ const Pokedex = () => {
   );
   const imageArray = Object.entries(images);
 
-  console.log("images", imageArray);
   return (
     <div>
       <Typography variant="h5" component="h2" mb={2}>
@@ -23,7 +22,7 @@ const Pokedex = () => {
         {imageArray &&
           imageArray.map((image, index) => {
             return (
-              <Grid item>
+              <Grid item key={index}>
                 <Card key={index} sx={{ textAlign: "center" }}>
                   <img
                     src={images[image[0]]}
