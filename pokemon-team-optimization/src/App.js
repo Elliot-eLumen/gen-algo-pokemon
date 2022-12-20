@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Setup from "./Routes/Setup";
 import Result from "./Routes/Result";
+import Pokedex from "./Routes/Pokedex";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -45,6 +46,7 @@ function App() {
           <Routes>
             <Route path="/" exact element={<Setup />} />
             <Route path="/result" exact element={<Result />} />
+            <Route path="/pokedex" exact element={<Pokedex />} />
           </Routes>
         </Router>
       </Container>
