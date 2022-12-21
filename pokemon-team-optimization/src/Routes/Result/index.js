@@ -1,4 +1,12 @@
-import { Card, Grid, Typography, Select, MenuItem } from "@mui/material";
+import {
+  Card,
+  Grid,
+  Typography,
+  Select,
+  MenuItem,
+  CardHeader,
+  CardContent,
+} from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import { ResultCard } from "../../Components/PokemonCard";
 import { Results } from "../../Utils/Context";
@@ -11,6 +19,14 @@ const Result = () => {
   useEffect(() => {
     setTeamIndex(results[0].length - 1);
   }, []);
+
+  const calculateOverallScore = (team) => {
+    let score = 0;
+    team.forEach((mon) => {
+      score += mon.stats;
+    });
+    return score;
+  };
   return (
     <>
       <Grid container alignItems="center" spacing={2} mb={2}>
@@ -39,6 +55,30 @@ const Result = () => {
       </Grid>
 
       <Card sx={{ padding: 3 }}>
+        {results[0].length > 0 && (
+          <Grid
+            container
+            direction="column"
+            alignItems="center"
+            paddingBottom="30px"
+          >
+            <Grid item>
+              <Card
+                sx={{
+                  fontSize: "30px",
+                }}
+              >
+                <CardHeader
+                  title="Overall Stats"
+                  sx={{ backgroundColor: "rgb(75, 181, 67)" }}
+                />
+                <CardContent sx={{ textAlign: "center" }}>
+                  {calculateOverallScore(results[0][teamIndex])}
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        )}
         <Grid container spacing={2}>
           {results[0].length > 0 ? (
             results[0][teamIndex].map((result, key) => {
