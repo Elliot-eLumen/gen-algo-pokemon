@@ -85,7 +85,13 @@ export const ResultCard = ({ data }) => {
   const imgArray = useContext(Images);
 
   return (
-    <Card sx={{ maxWidth: 345, backgroundColor: "#666" }}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        backgroundColor: "rgba(255, 255, 255, 0.7)",
+        color: "#333",
+      }}
+    >
       <CardMedia
         sx={{
           height: 140,

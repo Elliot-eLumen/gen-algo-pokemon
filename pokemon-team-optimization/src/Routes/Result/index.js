@@ -14,7 +14,7 @@ const Result = () => {
       <Card sx={{ padding: 3 }}>
         <Grid container spacing={2}>
           {results[0].length > 0 ? (
-            results[0][25].map((result, key) => {
+            results[0][results[0].length - 1].map((result, key) => {
               return (
                 <Grid key={key} item sm={4}>
                   <ResultCard data={result} />
