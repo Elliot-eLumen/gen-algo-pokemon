@@ -29,14 +29,14 @@ const Result = () => {
   };
   return (
     <>
-      <Grid container alignItems="center" spacing={2} mb={2}>
-        <Grid item>
-          <Typography variant="h5" component="h2">
-            Results
-          </Typography>
-        </Grid>
-        <Grid item>
-          {results[0] && results[0].length > 0 && (
+      {results[0] && results[0].length > 0 && (
+        <Grid container alignItems="center" spacing={2} mb={2}>
+          <Grid item>
+            <Typography variant="h5" component="h2">
+              Results
+            </Typography>
+          </Grid>
+          <Grid item>
             <Select
               size="small"
               value={teamIndex}
@@ -50,35 +50,29 @@ const Result = () => {
                 );
               })}
             </Select>
-          )}
+          </Grid>
+          <Grid item>
+            <Card
+              sx={{
+                display: "flex",
+              }}
+            >
+              <CardHeader
+                title="Overall Stats"
+                sx={{
+                  backgroundColor: "rgb(75, 181, 67)",
+                  padding: "10px",
+                }}
+              />
+              <CardHeader sx={{padding: "10px"}}
+                title={calculateOverallScore(results[0][teamIndex])}
+              />
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
 
       <Card sx={{ padding: 3 }}>
-        {results[0].length > 0 && (
-          <Grid
-            container
-            direction="column"
-            alignItems="center"
-            paddingBottom="30px"
-          >
-            <Grid item>
-              <Card
-                sx={{
-                  fontSize: "30px",
-                }}
-              >
-                <CardHeader
-                  title="Overall Stats"
-                  sx={{ backgroundColor: "rgb(75, 181, 67)" }}
-                />
-                <CardContent sx={{ textAlign: "center" }}>
-                  {calculateOverallScore(results[0][teamIndex])}
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        )}
         <Grid container spacing={2}>
           {results[0].length > 0 ? (
             results[0][teamIndex].map((result, key) => {
