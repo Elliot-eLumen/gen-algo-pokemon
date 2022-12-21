@@ -1,28 +1,9 @@
-import { Box, Card, Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Card, Grid, Typography } from "@mui/material";
+import { useContext } from "react";
+import { Images } from "../../Utils/Context";
 
 const Pokedex = () => {
-  const [imgArray, setImgArray] = useState([]);
-  useEffect(() => {
-    function importAll(r) {
-      let images = {};
-      r.keys().map((item, index) => {
-        images[item.replace("./", "")] = r(item);
-      });
-      return images;
-    }
-    const images = importAll(
-      require.context("../../../images", false, /\.(png|jpe?g|svg)$/)
-    );
-    const imageValues = Object.values(images);
-    const imageKeys = Object.keys(images);
-    let finalImageArray = [];
-    imageKeys.forEach((image, key) => {
-      finalImageArray[image.replace(".png", "")] = imageValues[key];
-    });
-    setImgArray(finalImageArray);
-  }, []);
-
+  const imgArray = useContext(Images);
   return (
     <>
       <Typography variant="h5" component="h2">

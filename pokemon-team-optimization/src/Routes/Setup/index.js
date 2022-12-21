@@ -116,7 +116,7 @@ const Setup = () => {
             <TextField
               fullWidth
               id="outlined-number"
-              label="Number"
+              label="Number of Generations"
               type="number"
               InputProps={{ inputProps: { min: 0, max: 500 } }}
               InputLabelProps={{
