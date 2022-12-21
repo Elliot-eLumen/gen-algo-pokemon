@@ -1,3 +1,4 @@
 import { createContext } from "react";
 const Images = createContext(null);
-export { Images };
+const Results = createContext(null);
+export { Images, Results };

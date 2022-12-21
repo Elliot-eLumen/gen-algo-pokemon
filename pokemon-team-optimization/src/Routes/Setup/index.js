@@ -9,8 +9,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Results } from "../../Utils/Context";
 const Setup = () => {
+  const [resultData, setResultData] = useContext(Results);
   const [poolSize, setPoolSize] = useState("");
   const [rateArray, setRateArray] = useState([]);
   const [rate, setRate] = useState("");
@@ -39,11 +41,10 @@ const Setup = () => {
       }),
     }).then((res) => {
       res.json().then((data) => {
-        console.log(data);
+        setResultData(data);
       });
     });
   };
-
   return (
     <>
       <Typography variant="h5" component="h2">

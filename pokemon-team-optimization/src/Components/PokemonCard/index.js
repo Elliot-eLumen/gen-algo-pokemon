@@ -3,10 +3,55 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Chip,
+  Stack,
   Typography,
 } from "@mui/material";
 import { useContext } from "react";
 import { Images } from "../../Utils/Context";
+
+const handleColor = (data) => {
+  switch (data[0]) {
+    case "water":
+      return "#6390F0";
+
+    case "ice":
+      return "#96D9D6";
+
+    case "grass":
+      return "#7ac74c";
+
+    case "bug":
+      return "#a6b91a";
+
+    case "ground":
+      return "#e2bf65";
+
+    case "rock":
+      return "#b6a136";
+
+    case "electric":
+      return "#f7d02c";
+
+    case "ghost":
+      return "#735797";
+
+    case "fighting":
+      return "#c22e28";
+
+    case "fire":
+      return "#ee8130";
+
+    case "poison":
+      return "#a33ea1";
+
+    case "flying":
+      return "#a98ff3";
+
+    default:
+      return "#a8a77a";
+  }
+};
 
 const DetailsCard = () => {
   const imgArray = useContext(Images);
@@ -36,24 +81,44 @@ const DetailsCard = () => {
   );
 };
 
-export const ResultCard = ({ id }) => {
+export const ResultCard = ({ data }) => {
   const imgArray = useContext(Images);
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, backgroundColor: "#666" }}>
       <CardMedia
         sx={{
           height: 140,
           backgroundSize: "150px auto",
-          backgroundColor: "lightgreen",
+          backgroundColor: handleColor(data.typing),
         }}
-        image={imgArray[id]}
-        title="bulbasaur"
+        image={imgArray[data.id]}
+        title={data.name}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Bulbasaur
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{ textTransform: "capitalize" }}
+        >
+          {data.name}
         </Typography>
-        Type: Grass, Poison Height: 2'04" Weight: 15.2lbs Evolve: Level 16
+        <Stack direction="row" spacing={1}>
+          <Typography>Type:</Typography>
+          {data.typing.map((type, key) => {
+            return (
+              <Chip
+                sx={{ textTransform: "capitalize" }}
+                key={key}
+                label={type}
+                size="small"
+                color="primary"
+              />
+            );
+          })}
+        </Stack>{" "}
+        Stats: {data.stats}
       </CardContent>
       <CardActions></CardActions>
     </Card>
