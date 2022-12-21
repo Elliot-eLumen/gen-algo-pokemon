@@ -9,11 +9,12 @@ class PokemonHandler(Resource):
         parser.add_argument("poolSize", type=int)
         parser.add_argument("mutationRate", type=int)
         parser.add_argument("fitnessFunction", type=str)
+        parser.add_argument("numGens", type=int)
 
         args = parser.parse_args()
 
         teams = Mon.run_control(
-            args["poolSize"], args["mutationRate"], args["fitnessFunction"]
+            args['numGens'],args["poolSize"], args["mutationRate"], args["fitnessFunction"]
         )
 
         best_teams = []

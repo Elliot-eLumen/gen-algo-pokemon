@@ -9,12 +9,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Results } from "../../Utils/Context";
 const Setup = () => {
-  const navigate = useNavigate();
-  const [resultData, setResultData] = useContext(Results);
   const [poolSize, setPoolSize] = useState("");
   const [rateArray, setRateArray] = useState([]);
   const [rate, setRate] = useState("");
@@ -29,6 +27,9 @@ const Setup = () => {
   const handleFitnessChange = (event) => {
     setFitnessFunction(event.target.value);
   };
+  const [numGens, setNumGens] = useState(0);
+  const navigate = useNavigate();
+  const [resultData, setResultData] = useContext(Results);
 
   const handleSave = () => {
     fetch("http://127.0.0.1:5000/pokemon", {
@@ -40,6 +41,7 @@ const Setup = () => {
         poolSize: poolSize,
         mutationRate: rate,
         fitnessFunction: fitnessFunction,
+        numGens: numGens,
       }),
     }).then((res) => {
       res.json().then((data) => {
@@ -48,6 +50,8 @@ const Setup = () => {
       });
     });
   };
+  console.log(numGens);
+
   return (
     <>
       <Typography variant="h5" component="h2">
@@ -126,6 +130,7 @@ const Setup = () => {
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={(v) => setNumGens(v.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

@@ -525,7 +525,7 @@ def mutate():
     return random.choice(PokemonArray)
 
 
-def run_control(poolSize, mutationRate, fitnessFunction):
+def run_control(numGens, poolSize, mutationRate, fitnessFunction):
     team = None
     if poolSize == 20:
         team = randomTeamsTwenty()
@@ -538,19 +538,19 @@ def run_control(poolSize, mutationRate, fitnessFunction):
 
     if fitnessFunction == "stats":
         best_teams = Stat.initialize(
-            25, team, poolSize, mutationRate, mutate
+            numGens, team, poolSize, mutationRate, mutate
         )
     if fitnessFunction == "general":
         best_teams = GenCov.initialize(
-            25, team, poolSize, mutationRate, mutate
+            numGens, team, poolSize, mutationRate, mutate
         )
     if fitnessFunction == "specific":
         best_teams = ChampCov.initialize(
-            25, team, poolSize, mutationRate, mutate
+            numGens, team, poolSize, mutationRate, mutate
         )
     if fitnessFunction == "combo":
         best_teams = Combo.initialize(
-            20, team, poolSize, mutationRate, mutate
+            numGens, team, poolSize, mutationRate, mutate
         )
 
     return best_teams
