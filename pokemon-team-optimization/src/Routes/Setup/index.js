@@ -10,8 +10,10 @@ import {
   Typography,
 } from "@mui/material";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Results } from "../../Utils/Context";
 const Setup = () => {
+  const navigate = useNavigate();
   const [resultData, setResultData] = useContext(Results);
   const [poolSize, setPoolSize] = useState("");
   const [rateArray, setRateArray] = useState([]);
@@ -42,6 +44,7 @@ const Setup = () => {
     }).then((res) => {
       res.json().then((data) => {
         setResultData(data);
+        navigate("/result");
       });
     });
   };
