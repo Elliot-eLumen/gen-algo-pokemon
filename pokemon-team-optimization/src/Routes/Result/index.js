@@ -5,7 +5,6 @@ import {
   Select,
   MenuItem,
   CardHeader,
-  CardContent,
 } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import { ResultCard } from "../../Components/PokemonCard";
@@ -14,11 +13,25 @@ import { Results } from "../../Utils/Context";
 const Result = () => {
   const results = useContext(Results);
   const [teamIndex, setTeamIndex] = useState(0);
-  console.log("result", teamIndex);
+  const [vsPrevGen, setVsPrevGen] = useState(0);
+  const [vsGenZero, setVsGenZero] = useState(0);
 
   useEffect(() => {
     setTeamIndex(results[0].length - 1);
   }, []);
+
+  useEffect(() => {
+    if (teamIndex > 0) {
+      setVsPrevGen(
+        calculateOverallScore(results[0][teamIndex]) -
+          calculateOverallScore(results[0][teamIndex - 1])
+      );
+      setVsGenZero(
+        calculateOverallScore(results[0][teamIndex]) -
+          calculateOverallScore(results[0][0])
+      );
+    }
+  }, [teamIndex]);
 
   const calculateOverallScore = (team) => {
     let score = 0;
@@ -26,6 +39,14 @@ const Result = () => {
       score += mon.stats;
     });
     return score;
+  };
+
+  const handleBackgroundColor = (score) => {
+    if (score > 0) {
+      return "rgb(75, 181, 67)";
+    } else if (score < 0) {
+      return "rgb(252, 16, 13)";
+    }
   };
   return (
     <>
@@ -51,10 +72,11 @@ const Result = () => {
               })}
             </Select>
           </Grid>
-          <Grid item>
+          <Grid item sx={{ display: "flex" }}>
             <Card
               sx={{
                 display: "flex",
+                marginRight: "15px",
               }}
             >
               <CardHeader
@@ -64,10 +86,55 @@ const Result = () => {
                   padding: "10px",
                 }}
               />
-              <CardHeader sx={{padding: "10px"}}
+              <CardHeader
+                sx={{ padding: "10px" }}
                 title={calculateOverallScore(results[0][teamIndex])}
               />
             </Card>
+            {teamIndex !== 0 && (
+              <>
+                <Card
+                  sx={{
+                    display: "flex",
+                    marginRight: "15px",
+                  }}
+                >
+                  <CardHeader
+                    title="vs. Previous Gen"
+                    sx={{
+                      padding: "10px",
+                    }}
+                  />
+
+                  <CardHeader
+                    sx={{
+                      padding: "10px",
+                      backgroundColor: handleBackgroundColor(vsPrevGen),
+                    }}
+                    title={vsPrevGen > 0 ? "+" + vsPrevGen : vsPrevGen}
+                  />
+                </Card>
+                <Card
+                  sx={{
+                    display: "flex",
+                  }}
+                >
+                  <CardHeader
+                    title="vs. Gen 0"
+                    sx={{
+                      padding: "10px",
+                    }}
+                  />
+                  <CardHeader
+                    sx={{
+                      padding: "10px",
+                      backgroundColor: handleBackgroundColor(vsGenZero),
+                    }}
+                    title={vsGenZero > 0 ? "+" + vsGenZero : vsGenZero}
+                  />
+                </Card>
+              </>
+            )}
           </Grid>
         </Grid>
       )}
