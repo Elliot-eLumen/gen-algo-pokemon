@@ -4,7 +4,8 @@ import { ResultCard } from "../../Components/PokemonCard";
 import { Results } from "../../Utils/Context";
 
 const Result = () => {
-  const results = useContext(Results || []);
+  const results = useContext(Results);
+  console.log("result", results);
   return (
     <>
       <Typography variant="h5" component="h2">
@@ -13,7 +14,7 @@ const Result = () => {
       <Card sx={{ padding: 3 }}>
         <Grid container spacing={2}>
           {results[0].length > 0 ? (
-            results[0][0].map((result, key) => {
+            results[0][25].map((result, key) => {
               return (
                 <Grid key={key} item sm={4}>
                   <ResultCard data={result} />
