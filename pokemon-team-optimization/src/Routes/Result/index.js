@@ -19,7 +19,11 @@ const Result = () => {
           onChange={(v) => setTeamIndex(v.target.value)}
         >
           {results[0].map((team, index) => {
-            return <MenuItem value={index}>{index}</MenuItem>;
+            return (
+              <MenuItem key={index} value={index}>
+                {index}
+              </MenuItem>
+            );
           })}
         </Select>
       )}

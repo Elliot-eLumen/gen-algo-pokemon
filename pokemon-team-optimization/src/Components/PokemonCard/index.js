@@ -1,6 +1,5 @@
 import {
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Chip,
@@ -76,7 +75,6 @@ const DetailsCard = () => {
           from a seed planted there at birth.
         </Typography>
       </CardContent>
-      <CardActions></CardActions>
     </Card>
   );
 };
@@ -88,19 +86,24 @@ export const ResultCard = ({ data }) => {
     <Card
       sx={{
         maxWidth: 345,
-        backgroundColor: "rgba(255, 255, 255, 0.7)",
-        color: "#333",
       }}
     >
       <CardMedia
         sx={{
           height: 140,
+          textAlign: "center",
           backgroundSize: "150px auto",
+
           backgroundColor: handleColor(data.typing),
         }}
-        image={imgArray[data.id]}
         title={data.name}
-      />
+      >
+        <img
+          style={{ height: "150px" }}
+          src={`${imgArray[data.id]}`}
+          alt={data.name}
+        />
+      </CardMedia>
       <CardContent>
         <Typography
           gutterBottom
@@ -119,14 +122,12 @@ export const ResultCard = ({ data }) => {
                 key={key}
                 label={type}
                 size="small"
-                color="primary"
               />
             );
           })}
         </Stack>{" "}
         Stats: {data.stats}
       </CardContent>
-      <CardActions></CardActions>
     </Card>
   );
 };
