@@ -8,21 +8,20 @@ import {
   ListItemText,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useContext } from "react";
 import { Images } from "../../Utils/Context";
-import handleColor from "../../Utils/Color";
 
 export const DetailsCard = ({ data, image }) => {
-  // const imgArray = useContext(Images);
-  console.log("poke data", data);
+  const theme = useTheme();
   return (
     <Card
       sx={{
         minWidth: 345,
         maxWidth: 345,
         border: "1px solid",
-        borderColor: handleColor(data.types[0].type.name),
+        borderColor: theme.palette[data.types[0].type.name].main,
       }}
     >
       <CardMedia
@@ -30,8 +29,7 @@ export const DetailsCard = ({ data, image }) => {
           height: 140,
           textAlign: "center",
           backgroundSize: "150px auto",
-
-          backgroundColor: handleColor(data.types[0].type.name),
+          backgroundColor: theme.palette[data.types[0].type.name].main,
         }}
         title={data.name}
       >
@@ -58,6 +56,7 @@ export const DetailsCard = ({ data, image }) => {
                 key={key}
                 label={type.type.name}
                 size="small"
+                color={type.type.name}
               />
             );
           })}
@@ -72,16 +71,9 @@ export const DetailsCard = ({ data, image }) => {
                   primary={`${stat.stat.name}: Base Stat: ${stat.base_stat} Effort: ${stat.effort}`}
                 />
               </ListItem>
-              // <Chip
-              //   sx={{ textTransform: "capitalize" }}
-              //   key={key}
-              //   label={stat.type.name}
-              //   size="small"
-              // />
             );
           })}
         </List>
-        {/* Stats: {data.stats} */}
       </CardContent>
     </Card>
   );
@@ -89,13 +81,15 @@ export const DetailsCard = ({ data, image }) => {
 
 export const ResultCard = ({ data }) => {
   const imgArray = useContext(Images);
+  const theme = useTheme();
 
   return (
     <Card
       sx={{
         maxWidth: 345,
         border: `1px solid`,
-        borderColor: handleColor(data.typing[0]),
+
+        borderColor: theme.palette[data.typing[0]].main,
       }}
     >
       <CardMedia
@@ -104,7 +98,7 @@ export const ResultCard = ({ data }) => {
           textAlign: "center",
           backgroundSize: "150px auto",
 
-          backgroundColor: handleColor(data.typing[0]),
+          backgroundColor: theme.palette[data.typing[0]].main,
         }}
         title={data.name}
       >
@@ -132,6 +126,7 @@ export const ResultCard = ({ data }) => {
                 key={key}
                 label={type}
                 size="small"
+                color={type}
               />
             );
           })}
