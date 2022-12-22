@@ -95,6 +95,8 @@ function App() {
     });
   }, []);
 
+  console.log(pokemonData);
+
   return (
     <ThemeProvider theme={theme}>
       <Results.Provider value={[resultData, setResultData]}>

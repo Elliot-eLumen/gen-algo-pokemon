@@ -79,9 +79,11 @@ export const DetailsCard = ({ data, image }) => {
   );
 };
 
-export const ResultCard = ({ data }) => {
+export const ResultCard = ({ data, genNum }) => {
   const imgArray = useContext(Images);
   const theme = useTheme();
+
+  console.log(genNum);
 
   return (
     <Card
@@ -132,6 +134,7 @@ export const ResultCard = ({ data }) => {
           })}
         </Stack>{" "}
         Stats: {data.stats}
+        {genNum >= 0 && <Typography>Found in Generation: {genNum}</Typography>}
       </CardContent>
     </Card>
   );

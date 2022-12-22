@@ -5,6 +5,7 @@ import {
   Select,
   MenuItem,
   CardHeader,
+  CardContent,
 } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import { ResultCard } from "../../Components/PokemonCard";
@@ -15,10 +16,32 @@ const Result = () => {
   const [teamIndex, setTeamIndex] = useState(0);
   const [vsPrevGen, setVsPrevGen] = useState(0);
   const [vsGenZero, setVsGenZero] = useState(0);
+  const [genNumArr, setGenNumArr] = useState([]);
 
   useEffect(() => {
     setTeamIndex(results[0].length - 1);
   }, []);
+
+  useEffect(() => {
+    let arr = [];
+    if (teamIndex > 0) {
+      results[0][teamIndex].forEach((mon1, index) => {
+        let counter = 0;
+        results[0].forEach((team) => {
+          team.forEach((mon2) => {
+            if (mon1.name === mon2.name) {
+              if (arr.length < index + 1) {
+                arr.push(counter);
+              }
+            }
+          });
+          counter++;
+        });
+      });
+      setGenNumArr(arr);
+    }
+  }, [teamIndex]);
+  console.log(genNumArr);
 
   useEffect(() => {
     if (teamIndex > 0) {
@@ -41,6 +64,14 @@ const Result = () => {
     return score;
   };
 
+  const getGenNum = (key) => {
+    if (teamIndex === results[0].length - 1) {
+      return genNumArr[key];
+    } else {
+      return -1;
+    }
+  };
+
   const handleBackgroundColor = (score) => {
     if (score > 0) {
       return "rgb(75, 181, 67)";
@@ -48,6 +79,30 @@ const Result = () => {
       return "rgb(252, 16, 13)";
     }
   };
+
+  const findGen = (name) => {
+    let counter = 0;
+    //let ind = null;
+    let hold1 = results[0].every((team) => {
+      let hold2 = team.every((mon) => {
+        // console.log("here", mon.name.localeCompare(name), counter);
+        if (mon.name.localeCompare(name) === 0) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      if (hold2) {
+        return true;
+      } else {
+        counter++;
+        return false;
+      }
+    });
+    //console.log("hold1", hold1);
+    return counter;
+  };
+
   return (
     <>
       {results[0] && results[0].length > 0 && (
@@ -143,9 +198,10 @@ const Result = () => {
         <Grid container spacing={2}>
           {results[0].length > 0 ? (
             results[0][teamIndex].map((result, key) => {
+              console.log("result", result);
               return (
                 <Grid key={key} item sm={4}>
-                  <ResultCard data={result} />
+                  <ResultCard data={result} genNum={getGenNum(key)} />
                 </Grid>
               );
             })
