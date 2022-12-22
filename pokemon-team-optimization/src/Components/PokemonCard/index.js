@@ -13,6 +13,21 @@ import {
 import { useContext } from "react";
 import { Images } from "../../Utils/Context";
 
+const formatStats = (stat) => {
+  console.log(stat);
+  if (stat.stat.name === "hp") {
+    stat.stat.name = "HP";
+  }
+  if (stat.stat.name === "special-attack") {
+    stat.stat.name = "Special Attack";
+  }
+  if (stat.stat.name === "special-defense") {
+    stat.stat.name = "Special Defense";
+  }
+
+  return `${stat.stat.name}:  ${stat.base_stat}`;
+};
+
 export const DetailsCard = ({ data, image }) => {
   const theme = useTheme();
   return (
@@ -61,14 +76,14 @@ export const DetailsCard = ({ data, image }) => {
             );
           })}
         </Stack>
-        <Typography mb={0}>Stats:</Typography>
+        <Typography mb={0}>Base Stats:</Typography>
         <List dense>
           {data.stats.map((stat, key) => {
             return (
               <ListItem key={key}>
                 <ListItemText
                   sx={{ textTransform: "capitalize" }}
-                  primary={`${stat.stat.name}: Base Stat: ${stat.base_stat} Effort: ${stat.effort}`}
+                  primary={formatStats(stat)}
                 />
               </ListItem>
             );
