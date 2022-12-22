@@ -45,7 +45,7 @@ export const DetailsCard = ({ data, image }) => {
           {data.name}
         </Typography>
         <Typography mb={1}>
-          Height: {data.height} Weight: {data.weight}
+          Height: {data.height / 10} m Weight: {data.weight / 10} kg
         </Typography>
         <Stack direction="row" spacing={1} mb={1}>
           <Typography>Type:</Typography>
