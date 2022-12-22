@@ -52,6 +52,7 @@ function App() {
           psychic: palette.augmentColor({ color: { main: "#ED7396" } }),
           dragon: palette.augmentColor({ color: { main: "#642CE5" } }),
           normal: palette.augmentColor({ color: { main: "#a8a77a" } }),
+          steel: palette.augmentColor({ color: { main: "#b7b7c3" } }),
         },
       }),
     [prefersDarkMode]

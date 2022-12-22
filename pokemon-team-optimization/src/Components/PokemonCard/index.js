@@ -65,7 +65,7 @@ export const DetailsCard = ({ data, image }) => {
         <List dense>
           {data.stats.map((stat, key) => {
             return (
-              <ListItem>
+              <ListItem key={key}>
                 <ListItemText
                   sx={{ textTransform: "capitalize" }}
                   primary={`${stat.stat.name}: Base Stat: ${stat.base_stat} Effort: ${stat.effort}`}

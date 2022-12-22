@@ -2,7 +2,6 @@ import { Card, Grid, Popover, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { DetailsCard } from "../../Components/PokemonCard";
 import { Images, PokemonData } from "../../Utils/Context";
-import handleColor from "../../Utils/Color";
 
 const Pokedex = () => {
   const imgArray = useContext(Images);
@@ -60,7 +59,7 @@ const Pokedex = () => {
                       cursor: "pointer",
                     }}
                     component="button"
-                    onClick={handleOpen(pokemonData[index], image)}
+                    onClick={handleOpen(pokemonData[index - 1], image)}
                   >
                     <img
                       src={image}
