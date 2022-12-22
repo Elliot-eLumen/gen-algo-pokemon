@@ -1,6 +1,10 @@
 from flask_restful import Resource, reqparse
 import Mon
 import json
+from flask import request
+
+
+
 
 
 class PokemonHandler(Resource):
@@ -26,3 +30,21 @@ class PokemonHandler(Resource):
             best_teams.append(mons)
 
         return best_teams
+    
+   
+    def get(self):
+      
+      
+      id = int(request.args.get("id"))
+
+       
+
+      # args = parser.parse_args
+      # print(args)
+
+
+      mon = Mon.PokemonArray[id-1]
+      print(mon.name)
+
+      return  mon.toJson()
+      
