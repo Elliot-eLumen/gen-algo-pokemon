@@ -5,10 +5,10 @@ import {
   Chip,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useContext } from "react";
 import { Images } from "../../Utils/Context";
-import handleColor from "../../Utils/Color";
 
 export const DetailsCard = ({ data, image }) => {
   // const imgArray = useContext(Images);
@@ -30,13 +30,14 @@ export const DetailsCard = ({ data, image }) => {
 
 export const ResultCard = ({ data }) => {
   const imgArray = useContext(Images);
+  const theme = useTheme();
 
   return (
     <Card
       sx={{
         maxWidth: 345,
         border: `1px solid`,
-        borderColor: handleColor(data.typing),
+        borderColor: theme.palette[data.typing[0]].main,
       }}
     >
       <CardMedia
@@ -45,7 +46,7 @@ export const ResultCard = ({ data }) => {
           textAlign: "center",
           backgroundSize: "150px auto",
 
-          backgroundColor: handleColor(data.typing),
+          backgroundColor: theme.palette[data.typing[0]].main,
         }}
         title={data.name}
       >
@@ -73,6 +74,7 @@ export const ResultCard = ({ data }) => {
                 key={key}
                 label={type}
                 size="small"
+                color={type}
               />
             );
           })}

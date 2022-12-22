@@ -31,11 +31,27 @@ function App() {
   const [resultData, setResultData] = useState([]);
   const [pokemonData, setPokemonData] = useState([]);
 
+  const { palette } = createTheme();
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
+          water: palette.augmentColor({ color: { main: "#6390F0" } }),
+          ice: palette.augmentColor({ color: { main: "#96D9D6" } }),
+          grass: palette.augmentColor({ color: { main: "#7ac74c" } }),
+          bug: palette.augmentColor({ color: { main: "#a6b91a" } }),
+          ground: palette.augmentColor({ color: { main: "#e2bf65" } }),
+          rock: palette.augmentColor({ color: { main: "#b6a136" } }),
+          electric: palette.augmentColor({ color: { main: "#f7d02c" } }),
+          ghost: palette.augmentColor({ color: { main: "#735797" } }),
+          fighting: palette.augmentColor({ color: { main: "#c22e28" } }),
+          fire: palette.augmentColor({ color: { main: "#ee8130" } }),
+          poison: palette.augmentColor({ color: { main: "#a33ea1" } }),
+          flying: palette.augmentColor({ color: { main: "#a98ff3" } }),
+          psychic: palette.augmentColor({ color: { main: "#ED7396" } }),
+          dragon: palette.augmentColor({ color: { main: "#642CE5" } }),
+          normal: palette.augmentColor({ color: { main: "#a8a77a" } }),
         },
       }),
     [prefersDarkMode]
