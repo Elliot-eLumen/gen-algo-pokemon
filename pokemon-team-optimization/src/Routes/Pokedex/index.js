@@ -10,9 +10,11 @@ const Pokedex = () => {
   // const [mon, setMon] = useState({});
   const [anchorEl, setAnchorEl] = useState(null);
   const [detailData, setDetailData] = useState({});
+  const [pokemonImage, setPokemonImage] = useState("");
 
-  const handleOpen = (data) => (event) => {
+  const handleOpen = (data, image) => (event) => {
     setDetailData(data);
+    setPokemonImage(image);
     setAnchorEl(event.currentTarget);
   };
 
@@ -58,7 +60,7 @@ const Pokedex = () => {
                       cursor: "pointer",
                     }}
                     component="button"
-                    onClick={handleOpen(pokemonData[index])}
+                    onClick={handleOpen(pokemonData[index], image)}
                   >
                     <img
                       src={image}
@@ -66,21 +68,21 @@ const Pokedex = () => {
                       style={{ height: "75px" }}
                     />
                   </Card>
-                  <Popover
-                    id={id}
-                    open={open}
-                    onClose={handleClose}
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                  >
-                    <DetailsCard data={detailData} image={image} />
-                  </Popover>
                 </Grid>
               );
             })}
+          <Popover
+            id={id}
+            open={open}
+            onClose={handleClose}
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            <DetailsCard data={detailData} image={pokemonImage} />
+          </Popover>
         </Grid>
       </Card>
     </>

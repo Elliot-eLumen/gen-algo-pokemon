@@ -1,5 +1,5 @@
 const handleColor = (data) => {
-  switch (data[0]) {
+  switch (data) {
     case "water":
       return "#6390F0";
 
